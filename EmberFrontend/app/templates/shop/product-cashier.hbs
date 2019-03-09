@@ -1,0 +1,68 @@
+<div class="container-fluid mb-5 mt-5 pb-5 pt-5">
+  <div class="container">
+    <div class="row pb-5 pt-5">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2"></div>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 fade">
+        <div class="card">
+          <h1 class="card-title text-center pt-2">Checkout Tab<hr></h1>
+          <div class="card-body mr-5 ml-5">
+            <p>In order to buy the {{model.product.name}}, fill in the given information down bellow and press submit. You will be informed once the given order gets approved. Shipping can last anywhere from a week upwards to 40 days.</p>
+            {{input type="string" value=name class="default-input-form mt-2" autocomplete="off" placeholder="Name"}}
+            {{#if userNameHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{userNameErrorMessage}}
+              </div>
+            {{/if}}
+            {{input type="string" value=surname class="default-input-form mt-3" autocomplete="off" placeholder="Surname"}}
+            {{#if userSurnameHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{userSurnameErrorMessage}}
+              </div>
+            {{/if}}            
+            {{input type="string" value=email class="default-input-form mt-3" autocomplete="off" placeholder="Email"}}
+            {{#if userEmailHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{userEmailErrorMessage}}
+              </div>
+            {{/if}}
+            {{input type="string" value=phone class="default-input-form mt-3" autocomplete="off" placeholder="Phone"}}
+            {{#if userPhoneHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{userPhoneErrorMessage}}
+              </div>
+            {{/if}}
+            {{input type="string" value=country class="default-input-form mt-3" autocomplete="off" placeholder="Country"}}
+            {{#if userCountryHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{userCountryErrorMessage}}
+              </div>
+            {{/if}}
+            {{input type="string" value=address class="default-input-form mt-3" autocomplete="off" placeholder="Address"}}
+            {{#if userAddressHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{userAddressErrorMessage}}
+              </div>
+            {{/if}}
+            {{input type="string" value=zipCode class="default-input-form mt-3" autocomplete="off" placeholder="ZipCode"}}
+            {{#if userZipCodeHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{userZioCodeErrorMessage}}
+              </div>
+            {{/if}}
+            {{input type="number" value=quantity class="default-input-form mt-3" autocomplete="off" placeholder="Quantity"}}
+            {{#if itemQuantityHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{itemQuantityErrorMessage}}
+              </div>
+            {{/if}}
+            <div class="mt-5 mb-5">
+              <button class="checkout-button click-pointer" {{action 'checkout'}}>
+                Checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

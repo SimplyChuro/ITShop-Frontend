@@ -1,0 +1,136 @@
+<div class="container-fluid">
+  <div class="container pb-5">
+    <div class="row pt-5 pb-5">
+      <div class="col-5 col-sm-5 col-md-4 col-lg-3 col-xl-3">
+        <table class="table category-frame">
+          <p class="category-title">PRODUCT CATEGORIES</p>
+          <tbody>
+            {{#each model.categoryList as |category|}}
+              {{#if (eq category.parent_id null)}}
+                <tr {{action 'toggleDetails' category}} class="click-pointer"> 
+                  {{#if (eq parent_category category.id)}}
+                    <div class="category-table-main category-table-active-bg">
+                      {{category.name}}
+                      <span class="category-table-active">
+                        <i class="material-icons">
+                          expand_less
+                        </i>
+                      </span>
+                    </div>
+                  {{else}}
+                    <div class="category-table-main">
+                      {{category.name}}
+                      <span class="category-table-inactive">
+                        <i class="material-icons">
+                          expand_more
+                        </i>
+                      </span>
+                    </div>
+                  {{/if}}
+                </tr>
+                {{#if (eq parent_category category.id)}}
+                  {{#each model.categoryList as |subcategory|}}
+                    {{#if (eq subcategory.parent_id category.id)}}
+                      <tr class="click-pointer" {{action "selectCategory" subcategory}} value=selectedItem>
+                        {{#if (eq child_category subcategory.id)}}
+                          <div class="category-table-secondary category-table-active-bg">
+                            {{subcategory.name}}
+                          </div>
+                        {{else}}
+                          <div class="category-table-secondary">
+                            {{subcategory.name}}
+                          </div>
+                        {{/if}}
+                      </tr>
+                    {{/if}}
+                  {{/each}}
+                {{/if}}
+              {{/if}}
+            {{/each}}
+            <tr {{action "selectCategory" null}} class="click-pointer"> 
+              <div class="category-table-main">
+                All Categories
+              </div>
+            </tr> 
+          </tbody>
+        </table>
+        <table class="table category-frame full-width">
+          <div class="full-width">
+            <p class="category-title">FILTER BY NAME</p>
+            <tbody>          
+              <div class="product-input-holder">
+                {{input type="string" value=name class="default-input-form" autocomplete="off" placeholder="Name"}}
+              </div>
+            </tbody>
+          </div>
+        </table>
+        <table class="table category-frame full-width">
+          <div class="full-width">
+            <p class="category-title">FILTER BY PRICE</p>
+            <tbody>          
+              <div class="product-input-holder">
+                <div class="row">
+                  <div class="col-6">
+                    {{input type="string" value=minPrice class="default-input-form" autocomplete="off" placeholder="Min"}}
+                  </div>
+                  <div class="col-6">
+                    {{input type="string" value=maxPrice class="default-input-form" autocomplete="off" placeholder="Max"}}
+                  </div>
+                </div>
+              </div>
+            </tbody>
+          </div>
+        </table>
+      </div>
+      <div class="col-7 col-sm-7 col-md-8 col-lg-9 col-xl-9">
+        <div class="mr-0 ml-0">
+          <div class="product-sort-type-holder">
+            <select class="product-list-select" onchange={{action "setSortType" value="target.value"}}>
+              <option value="price-low">
+                Sort by Lowest Price
+              </option>
+              <option value="price-high">
+                Sort by Highest Price
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="mt-5 pt-5"></div>
+        {{#if filteredProducts}}
+          <div class="row">
+            {{#each (product-sort filteredProducts sorting) as |product index|}}
+              {{#if (is-less index listSize)}}
+                <div class="col-lg-4 col-xl-4 fade">
+                  {{#link-to "shop.product" product.id class="category-table-product"}}
+                    <div>
+                      <div class="product-card">
+                        {{#each product.pictures as |picture index|}}
+                          {{#if (is-main picture null index)}}
+                            <img class="product-image" src="{{picture.url}}">
+                          {{/if}}
+                        {{/each}}
+                      </div>
+                      <div class="mt-2">
+                        <h1 class="product-name-text">{{product.name}}</h1>
+                        <p class="product-price-text">Price - {{format-price product.price}}</p>
+                      </div>
+                    </div>
+                  {{/link-to}}
+                </div>
+              {{/if}}
+            {{/each}}
+            <div class="col-12">
+              {{#unless (is-less filteredProducts.length listSize)}}
+                {{#unless (eq filteredProducts.length listSize)}}
+                  <div class="load-button-holder text-center mt-2">
+                    <button class="load-button" {{action 'increaseListSize'}}>LOAD MORE</button>
+                  </div>
+                {{/unless}}
+              {{/unless}}
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

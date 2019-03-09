@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="row pt-5 pb-5 mt-5 margin-bottom-200 fade">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 mb-2">
+        <div class="d-lg-none d-xl-none">
+          <h1 class="product-title mb-2">{{model.product.name}}</h1>
+        </div>
+        {{#bs-carousel autoPlay=true as |car|}}
+          {{#each model.product.pictures as |picture|}}
+            {{#car.slide}}
+            <div class="product-image-holder">
+              <img class="product-image fade" src={{picture.url}}>
+            </div>
+            {{/car.slide}}
+          {{/each}}
+        {{/bs-carousel}}
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7">
+        <div class="d-none d-lg-block d-xl-block">
+          <h1 class="product-title mb-3">{{model.product.name}}</h1>
+        </div>
+        <div class="d-lg-none d-xl-none">
+          <div class="mt-2"></div>
+        </div>
+        <p class="product-price-text pt-2 pb-0 mb-0">Price - {{format-price model.product.price}}</p>
+        <p class="product-price-text pt-1">Brand - {{model.product.brand}}</p>
+        <div class="pt-4"> 
+          {{#link-to "shop.product-cashier" model.product.id class="buy-now-button"}}
+            BUY NOW
+            <i class="material-icons pl-1">
+              add_shopping_cart
+            </i>
+          {{/link-to}}
+        </div>
+        <p class="single-product-description-text mt-5">Details</p>
+        <hr class="single-product-underline">
+        <p>{{model.product.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>

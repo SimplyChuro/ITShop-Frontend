@@ -7,7 +7,7 @@ module.exports = function(environment) {
     rootURL: '/',
     locationType: 'auto',
     USER_TOKEN: '',
-    HOST_URL: 'https://ITShop-Travnik-Backend.herokuapp.com',
+    HOST_URL: 'https://itshop-travnik-backend.herokuapp.com',
     EmberENV: {
       FEATURES: {},
       EXTEND_PROTOTYPES: {
@@ -24,7 +24,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.HOST_URL = 'https://ITShop-Travnik-Backend.herokuapp.com';
+    ENV.HOST_URL = 'https://itshop-travnik-backend.herokuapp.com';
   }
 
   return ENV;

@@ -1,0 +1,120 @@
+<div class="container-fluid mb-5 mt-5 pb-5 pt-5">
+  <div class="container">
+    <div class="row pb-5 pt-5">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2"></div>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 fade">
+        <div class="card">
+          <h1 class="card-title text-center pt-2">Product Creation Tab<hr></h1>
+          <div class="card-body mr-5 ml-5">
+            {{input type="string" value=name class="default-input-form mt-2" autocomplete="off" placeholder="Name"}}
+            {{#if nameHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{nameErrorMessage}}
+              </div>
+            {{/if}}
+            {{input type="string" value=brand class="default-input-form mt-3" autocomplete="off" placeholder="Brand"}}
+            {{#if brandHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{brandErrorMessage}}
+              </div>
+            {{/if}}
+            {{input type="string" value=price class="default-input-form mt-3" autocomplete="off" placeholder="Price"}}
+            {{#if priceHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{priceErrorMessage}}
+              </div>
+            {{/if}}
+            {{textarea rows="4" cols="50" value=description class="default-input-form mt-3" placeholder="Description"}}
+            {{#if descriptionHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{descriptionErrorMessage}}
+              </div>
+            {{/if}}
+            <div class="row p-0 m-0 mt-3 mb-4 full-width">
+              <div class="half-width">
+                <div class="mr-2">
+                  <select onchange={{action "setCategory" value="target.value"}} class="product-select click-pointer">
+                    <option disabled selected> Select Category </option>
+                    {{#each model.categories as |cat|}}
+                      {{#if (eq cat.parent_id null)}}
+                        {{#if (eq cat.id category)}}
+                          <option value={{cat.id}} selected>
+                            {{cat.name}}
+                          </option>
+                        {{else}}
+                          <option value={{cat.id}}>
+                            {{cat.name}}
+                          </option>
+                        {{/if}}
+                      {{/if}}
+                    {{/each}}
+                  </select>
+                </div>
+                {{#if categoryHasError}}
+                  <div class="validation-error-message mt-1 fade">
+                    {{categoryErrorMessage}}
+                  </div>
+                {{/if}}
+              </div>
+              <div class="half-width">
+                <select onchange={{action "setSubCategory" value="target.value"}} class="product-select click-pointer">
+                  <option disabled selected> Select SubCategory </option>
+                    {{#unless (eq category null)}}
+                      {{#each model.categories as |cat|}}
+                        {{#if (eq category cat.parent_id)}}
+                          {{#if (eq cat.id subCategory)}}
+                            <option value={{cat.id}} selected>
+                              {{cat.name}}
+                            </option>
+                          {{else}}
+                            <option value={{cat.id}}>
+                              {{cat.name}}
+                            </option>
+                          {{/if}}
+                        {{/if}}
+                      {{/each}}
+                    {{/unless}}
+                </select>
+                {{#if subCategoryHasError}}
+                  <div class="validation-error-message mt-1 fade">
+                    {{subCategoryErrorMessage}}
+                  </div>
+                {{/if}}
+              </div>
+            </div>      
+            {{drop-zone id="dropzone-id" class="dropdown-menu-style" url="http://example.com/example" addedfile=addedFileEvent autoProcessQueue=false acceptedFiles=".jpeg,.jpg,.png" keepLocal=true maxFilesize=4 maxFiles=5}}
+            <div class="mt-3"></div>
+            {{#if pictureFiles}}
+              <div class="row m-0 p-0 dropzone-default">
+                {{#each pictureFiles as |picture index|}}
+                  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 m-0 p-0">
+                    <div class="p-2">
+                      <img class="dropzone-image" id={{get-image-id index}} />
+                      <p {{action 'removePicture' picture}} class="dropdown-remove-button click-pointer text-center mb-0">Remove</p>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            {{/if}}
+            {{#if picturesHaveError}}
+              <div class="validation-error-message mt-1 fade">
+                {{picturesErrorMessage}}
+              </div>
+            {{/if}}
+            {{input type="string" value=token class="default-input-form mt-3" autocomplete="off" placeholder="Token"}}
+            {{#if tokenHasError}}
+              <div class="validation-error-message mt-1 fade">
+                {{tokenErrorMessage}}
+              </div>
+            {{/if}}
+            <div class="mt-5 mb-5 float-right">
+              <button class="checkout-button click-pointer" {{action 'create'}}>
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

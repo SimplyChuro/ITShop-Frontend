@@ -13,11 +13,11 @@ Router.map(function() {
     this.route('product', { path: 'product/:product_id' });
     this.route('product-cashier', { path: 'product-cashier/:product_id' });
     this.route('product-list');
+    this.route('product-creator');
   });
   this.route('about');
   this.route('privacy-and-policy');
   this.route('terms-and-conditions');
-  this.route('product-creator');
 });
 
 export default Router;

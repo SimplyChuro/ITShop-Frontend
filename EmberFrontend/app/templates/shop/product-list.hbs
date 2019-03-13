@@ -5,7 +5,7 @@
         <table class="table category-frame">
           <p class="category-title">PRODUCT CATEGORIES</p>
           <tbody>
-            {{#each model.categoryList as |category|}}
+            {{#each model.categories as |category|}}
               {{#if (eq category.parent_id null)}}
                 <tr {{action 'toggleDetails' category}} class="click-pointer"> 
                   {{#if (eq parent_category category.id)}}
@@ -29,7 +29,7 @@
                   {{/if}}
                 </tr>
                 {{#if (eq parent_category category.id)}}
-                  {{#each model.categoryList as |subcategory|}}
+                  {{#each model.categories as |subcategory|}}
                     {{#if (eq subcategory.parent_id category.id)}}
                       <tr class="click-pointer" {{action "selectCategory" subcategory}} value=selectedItem>
                         {{#if (eq child_category subcategory.id)}}
@@ -54,15 +54,13 @@
             </tr> 
           </tbody>
         </table>
-        <table class="table category-frame full-width">
-          <div class="full-width">
-            <p class="category-title">FILTER BY NAME</p>
-            <tbody>          
-              <div class="product-input-holder">
-                {{input type="string" value=name class="default-input-form" autocomplete="off" placeholder="Name"}}
-              </div>
-            </tbody>
-          </div>
+        <table class="table category-frame">
+          <p class="category-title">FILTER BY NAME</p>
+          <tbody>
+            <div class="product-input-holder">
+              {{input type="string" value=name class="default-input-form" autocomplete="off" placeholder="Name"}}
+            </div>
+          </tbody>
         </table>
         <table class="table category-frame full-width">
           <div class="full-width">
@@ -83,16 +81,18 @@
         </table>
       </div>
       <div class="col-7 col-sm-7 col-md-8 col-lg-9 col-xl-9">
-        <div class="mr-0 ml-0">
-          <div class="product-sort-type-holder">
-            <select class="product-list-select" onchange={{action "setSortType" value="target.value"}}>
-              <option value="price-low">
-                Sort by Lowest Price
-              </option>
-              <option value="price-high">
-                Sort by Highest Price
-              </option>
-            </select>
+        <div class="d-none d-sm-block">
+          <div class="mr-0 ml-0">
+            <div class="product-sort-type-holder">
+              <select class="product-list-select" onchange={{action "setSortType" value="target.value"}}>
+                <option value="price-low">
+                  Sort by Lowest Price
+                </option>
+                <option value="price-high">
+                  Sort by Highest Price
+                </option>
+              </select>
+            </div>
           </div>
         </div>
         <div class="mt-5 pt-5"></div>

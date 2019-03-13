@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { isEmpty } from '@ember/utils';
+import swal from 'sweetalert';
 
 export default Controller.extend({
 
@@ -187,6 +188,7 @@ export default Controller.extend({
         this.set('itemQuantityHasError', null);
         this.set('itemQuantityErrorMessage', null);
         swal("Item successfully ordered!", "You have successfully ordered your product!", "success");
+        this.transitionToRoute("shop.product-list");
       }
     },
 

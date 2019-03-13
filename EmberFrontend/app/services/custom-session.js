@@ -6,7 +6,7 @@ export default Service.extend({
   userID: null,
   adminChecker: null,
 
-  getAuthToken: function(){
+  getAuthToken: function() {
     var token = null;
     if(!isEmpty(window.localStorage.getItem('auth-token'))) {
       token = window.localStorage.getItem('auth-token');
@@ -14,7 +14,7 @@ export default Service.extend({
     return token;
   },
   
-  getUserID: function(){
+  getUserID: function() {
     var idNumber = null;
     if(!isEmpty(window.localStorage.getItem('user-id'))) {
       idNumber = window.localStorage.getItem('user-id');
@@ -22,7 +22,7 @@ export default Service.extend({
     return parseInt(idNumber);
   },
 
-  getAdminChecker: function(){
+  getAdminChecker: function() {
     var token = null;
     if(!isEmpty(window.localStorage.getItem('admin-checker'))) {
       token = window.localStorage.getItem('admin-checker');

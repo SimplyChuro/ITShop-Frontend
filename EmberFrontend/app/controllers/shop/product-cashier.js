@@ -1,6 +1,8 @@
 import Controller from '@ember/controller';
 import { isEmpty } from '@ember/utils';
 import swal from 'sweetalert';
+import ENV from 'ember-frontend/config/environment';
+import $ from 'jquery';
 
 export default Controller.extend({
 
@@ -169,8 +171,9 @@ export default Controller.extend({
 
   actions: {
 
-    async checkout(){
+    async checkout() {
       if(this.customValidationPageOne()) {
+        var _this = this;
         this.set('userNameHasError', null);
         this.set('userNameErrorMessage', null);
         this.set('userSurnameHasError', null);
@@ -187,8 +190,31 @@ export default Controller.extend({
         this.set('userAddressErrorMessage', null);
         this.set('itemQuantityHasError', null);
         this.set('itemQuantityErrorMessage', null);
-        swal("Item successfully ordered!", "You have successfully ordered your product!", "success");
-        this.transitionToRoute("shop.product-list");
+
+        await $.ajax({
+          url: ENV.HOST_URL+'/api/v1/order',
+          type: 'POST',
+          data: JSON.stringify({
+            name: this.get('name'),
+            surname: this.get('surname'),
+            email: this.get('email'),
+            phone: this.get('phone'),
+            country: this.get('country'),
+            zipCode: this.get('zipCode'),
+            address: this.get('address'),
+            quantity: this.get('quantity'),
+            product_id: this.get('model.product').get('id')
+          }),
+          contentType: 'application/json;charset=utf-8',
+          dataType: 'json'
+        }).then(function() {
+          swal("Item successfully ordered!", "You have successfully ordered your product!", "success");
+          _this.transitionToRoute("shop.product-list");
+        }).catch(function() {
+          swal("Error!", "An error has occoured, please try again soon!", "error");
+          _this.transitionToRoute("shop.product-list");
+        });
+
       }
     },
 

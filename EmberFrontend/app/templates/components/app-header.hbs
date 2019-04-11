@@ -1,45 +1,40 @@
-<header class="container-fuild">    
-  {{#bs-navbar as |navbar|}}
-    <div class="container">
-      <div class="navbar-header">
-        {{#link-to 'home'}}
-          <img src="https://s3.eu-west-2.amazonaws.com/it-shop-travnik/default/LogoIT.png" class="logo"/>
-        {{/link-to}}
-      </div>
-      <div class="ml-auto">
-        {{navbar.toggle}}
-      </div>
-      <div class="nav navbar navbar-right">
-        {{#navbar.content}}
-          {{#navbar.nav as |nav|}}
-            {{#nav.item class="mr-2"}}
-              {{#nav.link-to "home"}}
-                <i class="material-icons">
-                  home
-                </i>
-                Home
-              {{/nav.link-to}}
-            {{/nav.item}}
-            {{#nav.item class="mr-2"}}
-              {{#nav.link-to "shop.product-list"}}
-              <i class="material-icons">
-                shopping_cart
-              </i>
-              Shop
-              {{/nav.link-to}}
-            {{/nav.item}}
-            {{#nav.item}}
-              {{#nav.link-to "about"}}
-              <i class="material-icons">
-                info
-              </i>
-              About Us
-              {{/nav.link-to}}
-            {{/nav.item}}
-          {{/navbar.nav}}
-        {{/navbar.content}}
-      </div>
-    </div>
-  {{/bs-navbar}}
-  <div class="border-line"></div>
-</header>
+ 
+{{#bs-navbar as |navbar|}}
+  <div class="container">
+	{{#link-to 'home'}}
+	  <img src="https://s3.eu-west-2.amazonaws.com/it-shop-travnik/default/LogoIT.png" class="logo"/>
+	{{/link-to}}
+ 
+	{{navbar.toggle}}
+
+	{{#navbar.content}}
+	  {{#navbar.nav class="ml-auto" as |nav|}}
+		{{#nav.item class="mr-2"}}
+		  {{#nav.link-to "home"}}
+			<i class="material-icons">
+			  home
+			</i>
+			Home
+		  {{/nav.link-to}}
+		{{/nav.item}}
+		{{#nav.item class="mr-2"}}
+		  {{#nav.link-to "shop.product-list"}}
+		  <i class="material-icons">
+			shopping_cart
+		  </i>
+		  Shop
+		  {{/nav.link-to}}
+		{{/nav.item}}
+		{{#nav.item}}
+		  {{#nav.link-to "about"}}
+		  <i class="material-icons">
+			info
+		  </i>
+		  About Us
+		  {{/nav.link-to}}
+		{{/nav.item}}
+	  {{/navbar.nav}}
+	{{/navbar.content}}
+  </div>
+{{/bs-navbar}}
+<div class="border-line"></div>
